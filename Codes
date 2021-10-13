@@ -15,7 +15,7 @@ def signalGenerator(NegativePeackPointOfAmplitude,PositivePeackPointOfAmplitude,
     fSignal=[random.uniform(lowFrequency,highFrequency) for i in range(len(t))]
     signal=A*np.sin(2*np.pi*np.asarray(fSignal)*t)
     return signal
-#Method 2: In this method the signals will produce one by one:
+#Method 2: In this method the signals will produce one by one manually:
 t = np.linspace(0,10,256)
 A=[round(random.uniform(-3.0, 3.0), 2) for i in range(len(t))]
 fBeta=[random.uniform(13.0,30.0) for i in range(len(t))]
@@ -30,7 +30,7 @@ signalDelta=A*np.sin(2*np.pi*np.asarray(fDelta)*t)
 #At the end all those four signals must sum together, to create final signal EEG:
 EEGSignal=signalBeta+signalAlpha+signalTheta+signalDelta
 
-#After make the signal, this is time to save signal in CSV format. There are two solution:
+#After make the signal, this is time to save signal in CSV format. There are two solutions:
 #Solution 1: each column of CSV file contains one signal
 myDictionary={
     "Time":t,
