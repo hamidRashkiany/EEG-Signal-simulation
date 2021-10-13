@@ -15,3 +15,38 @@ def signalGenerator(NegativePeackPointOfAmplitude,PositivePeackPointOfAmplitude,
     fSignal=[random.uniform(lowFrequency,highFrequency) for i in range(len(t))]
     signal=A*np.sin(2*np.pi*np.asarray(fSignal)*t)
     return signal
+#Method 2: In this method the signals will produce one by one:
+t = np.linspace(0,10,256)
+A=[round(random.uniform(-3.0, 3.0), 2) for i in range(len(t))]
+fBeta=[random.uniform(13.0,30.0) for i in range(len(t))]
+fAlph=[random.uniform(8.0,13.0) for i in range(len(t))]
+fTheta=[random.uniform(4.0,8.0) for i in range(len(t))]
+fDelta=[random.uniform(0.5,4.0) for i in range(len(t))]
+signalBeta=A*np.sin(2*np.pi*np.asarray(fBeta)*t)
+signalAlpha=A*np.sin(2*np.pi*np.asarray(fAlph)*t)
+signalTheta=A*np.sin(2*np.pi*np.asarray(fTheta)*t)
+signalDelta=A*np.sin(2*np.pi*np.asarray(fDelta)*t)
+
+#At the end all those four signals must sum together, to create final signal EEG:
+EEGSignal=signalBeta+signalAlpha+signalTheta+signalDelta
+
+#After make the signal, this is time to save signal in CSV format. There are two solution:
+#Solution 1: each column of CSV file contains one signal
+myDictionary={
+    "Time":t,
+    "EEGSignal":EEGSignal,
+    "Alpha":signalAlpha,
+    "Beta":signalBeta,
+    "Delta":signalDelta,
+    "Tetha":signalTheta,
+}
+df3=pd.DataFrame(myDictionary)
+my_file=open("C:******\\SignalCSVFile.csv",mode="w")
+df3.to_csv(my_file)
+my_file.close()
+
+#Solution 2: each signal stores in one row
+columns_name=[]
+for i in range(0,len(t)):
+    columns_name.append("Components"+str(i))
+dataFrame=pd.DataFrame(data=[t,signalAlpha,signalBeta,signalDelta,signalTheta,EEGSignal],columns=columns_name)
