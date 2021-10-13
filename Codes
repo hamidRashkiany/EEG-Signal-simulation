@@ -1,0 +1,17 @@
+#Method 1: In this method we make a signal by a function called signalGenerator
+def signalGenerator(NegativePeackPointOfAmplitude,PositivePeackPointOfAmplitude,startTime,endTime,samplingFrequency,lowFrequency,highFrequency):
+    """
+    NegativePeackPointOfAmplitudestratTime: This is the negative peak point amplitude of signal
+    PositivePeackPointOfAmplitude: This is the positive peak point amplitude of signal
+    startTime: Defines the starting point time of signal in time domain
+    endTime: Defines the ending point time of signal in time domain
+    samplingFrequncy: Number of samples per seconds
+    lowFrequency: The lowest rate of freqency
+    highFrequency: The highest rate of frequency
+    """
+    numberOfSamples=endTime*samplingFrequency
+    t = np.linspace(startTime,endTime,numberOfSamples)
+    A=[round(random.uniform(NegativePeackPointOfAmplitudestratTime, PositivePeackPointOfAmplitude), 2) for i in range(len(t))]
+    fSignal=[random.uniform(lowFrequency,highFrequency) for i in range(len(t))]
+    signal=A*np.sin(2*np.pi*np.asarray(fSignal)*t)
+    return signal
